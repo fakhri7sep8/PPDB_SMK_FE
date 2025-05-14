@@ -1,5 +1,5 @@
+import Button from "@/components/button";
 import Image from "next/image";
-import Button from "./component/Button";
 export default function Page() {
   return (
     <div className="font-family">
