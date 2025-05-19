@@ -118,8 +118,6 @@ export default function DashboardPage() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-
-          {/* Pie Chart */}
           <div className="bg-white p-6 rounded-xl shadow-md">
             <h2 className="text-lg font-semibold mb-4">Hasil Tes Siswa Baru</h2>
             <ResponsiveContainer width="100%" height={260}>
@@ -209,3 +207,6 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+// baru nih 
+// jnjnjj
