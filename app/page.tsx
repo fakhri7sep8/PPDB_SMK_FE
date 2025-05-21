@@ -36,7 +36,9 @@ export default function Page() {
           <h2 className="text-6xl font-bold text-[#18A558] mb-4">
             MADINATUL QURAN
           </h2>
-          <p className="text-gray-500 text-lg leading-relaxed w-[75%]">
+          <p className="text-gray-500 text-lg leading-relaxed w-[75%] mb-3"
+         
+
             Sekolah Menengah Kejuruan MADINATULQURAN atau SMK MQ adalah salah
             satu sekolah di Kecamatan Jonggol Kabupaten Bogor, Jawa Barat yang
             beroperasi mulai tahun 2015 dan sudah terakreditasi dari BANS/M
@@ -45,7 +47,9 @@ export default function Page() {
           <Button
             colorSchema="green"
             title="Daftar Sekarang"
-            width="xl"
+
+            width="Large"
+
           ></Button>
         </div>
         {/* Kanan */}
