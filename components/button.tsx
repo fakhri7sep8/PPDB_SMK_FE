@@ -52,7 +52,7 @@ const Button: React.FC<ButtonProps> = ({
           // Width
           "w-20": width === "sm",
           "w-24": width === "md",
-          "w-32" : width === "Large",
+          "w-40" : width === "Large",
           "w-full": width === "full",
 
           // Height
