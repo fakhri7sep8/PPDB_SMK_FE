@@ -25,13 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ReactQuery>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ReactQuery>
           {children}
-        </body>
-      </ReactQuery>
+        </ReactQuery>
+      </body>
     </html>
   );
 }
