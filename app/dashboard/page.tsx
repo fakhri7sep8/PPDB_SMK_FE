@@ -128,6 +128,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-// baru nih
-// jnjnjj
