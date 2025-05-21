@@ -30,23 +30,37 @@ const Button: React.FC<
     <button
       {...props}
       disabled={isDisabled}
-      className={clsx(` rounded border w-20  capitalize`, {
-        "bg-blue-500 text-white": colorSchema === "blue" && variant === "solid",
-        "border-blue-500 text-blue-500":
-          colorSchema === "blue" && variant === "outline",
-        "bg-red-500 text-white": colorSchema === "red" && variant === "solid",
-        "border-red-500 text-red-500 ":
-          colorSchema === "red" && variant === "outline",
-        "bg-green-500 text-white":
-          colorSchema === "green" && variant === "solid",
-        "border-green-500 text-green-500":
-          colorSchema === "green" && variant === "outline",
-        "opacity-25": isDisabled,
-        "w-40": width === "xl",
-        "w-full": width === "full",
-        "h-8": width === "sm",
-        "w-20": width === "md",
-      })}
+      className={clsx(
+        "rounded-full border capitalize flex items-center justify-center",
+        {
+          // Warna solid
+          "bg-blue-500 text-white": colorSchema === "blue" && variant === "solid",
+          "bg-red-500 text-white": colorSchema === "red" && variant === "solid",
+          "bg-green-500 text-white": colorSchema === "green" && variant === "solid",
+
+          // Warna outline
+          "border-blue-500 text-blue-500 bg-transparent":
+            colorSchema === "blue" && variant === "outline",
+          "border-red-500 text-red-500 bg-transparent":
+            colorSchema === "red" && variant === "outline",
+          "border-green-500 text-green-500 bg-transparent":
+            colorSchema === "green" && variant === "outline",
+
+          // Disabled
+          "opacity-50 cursor-not-allowed": isDisabled,
+
+          // Width
+          "w-20": width === "sm",
+          "w-24": width === "md",
+          "w-40" : width === "Large",
+          "w-full": width === "full",
+
+          // Height
+          "h-8": height === "sm",
+          "h-10": height === "md",
+          "h-12": height === "full",
+        }
+      )}
     >
       {!isLoading ? (
         title
