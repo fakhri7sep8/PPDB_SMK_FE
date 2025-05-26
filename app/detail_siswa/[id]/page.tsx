@@ -1,41 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import useDetailSiswaModule from "@/hook/useDetailPeserta";
 
 export default function DetailSiswaPage() {
   const { id } = useParams();
-  const [siswa, setSiswa] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const siswaId = String(id);
+  const { useGetDetailSiswa } = useDetailSiswaModule();
+  const { data: siswa, isLoading, error } = useGetDetailSiswa(siswaId);
 
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    fetch(`http://localhost:4000/calonsiswa/detail/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch data");
-        return res.json();
-      })
-      .then((res) => {
-        setSiswa(res.siswa);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Gagal fetch detail:", err);
-        setError("Gagal memuat data siswa");
-        setLoading(false);
-      });
-  }, [id]);
-
-  if (loading) {
+  if (isLoading) {
     return <div className="p-6 text-center">Loading...</div>;
   }
 
   if (error) {
-    return <div className="p-6 text-center text-red-600">{error}</div>;
+    return (
+      <div className="p-6 text-center text-red-600">
+        Gagal memuat data siswa
+      </div>
+    );
   }
 
   if (!siswa) {
@@ -62,7 +46,9 @@ export default function DetailSiswaPage() {
           <div className="border p-4 rounded-md space-y-4">
             <div>
               <p className="text-sm text-gray-500">Tempat, tanggal Lahir</p>
-              <p className="border-b pb-1">{siswa.tempat_lahir}, {siswa.tanggal_lahir}</p>
+              <p className="border-b pb-1">
+                {siswa.tempat_lahir}, {siswa.tanggal_lahir}
+              </p>
             </div>
             <div>
               <p className="text-sm text-gray-500">Jenis Kelamin</p>
@@ -95,6 +81,51 @@ export default function DetailSiswaPage() {
               <p className="text-sm text-gray-500">Tahun Ajaran</p>
               <p className="border-b pb-1">{siswa.tahun_ajaran}</p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Div tambahan untuk berkas */}
+      <div className="bg-white border rounded-xl shadow-md p-6">
+        <h2 className="text-lg font-semibold mb-4">Berkas Upload</h2>
+
+        <div className="space-y-4">
+          <div>
+            <p className="text-sm text-gray-500">No</p>
+            <p className="border-b pb-1">1</p> {/* Ganti kalau ada logic urutan */}
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">NISN</p>
+            <p className="border-b pb-1">{siswa.nisn}</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">Nama Siswa</p>
+            <p className="border-b pb-1">{siswa.nama_lengkap}</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">Berkas (Preview)</p>
+            {siswa.berkas_url ? (
+              siswa.berkas_url.endsWith(".pdf") ? (
+                <a
+                  href={siswa.berkas_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Lihat PDF
+                </a>
+              ) : (
+                <Image
+                  src={siswa.berkas_url}
+                  alt="Berkas"
+                  width={300}
+                  height={200}
+                  className="rounded-md border"
+                />
+              )
+            ) : (
+              <p className="text-gray-400 italic">Tidak ada berkas diupload.</p>
+            )}
           </div>
         </div>
       </div>

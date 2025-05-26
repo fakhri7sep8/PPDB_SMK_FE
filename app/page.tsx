@@ -300,6 +300,6 @@ export default function Page() {
     </div>
   </div>
 </footer>
-    </div>
-  );
+</div>
+);
 }
