@@ -28,7 +28,6 @@ export default function DetailSiswaPage() {
 
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-10">
-      {/* Data Diri */}
       <div className="bg-white border rounded-xl shadow-md p-6">
         <h2 className="text-lg font-semibold mb-4">Data diri</h2>
 
