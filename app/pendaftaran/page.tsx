@@ -1,23 +1,16 @@
 "use client";
 
 import Sidebar from "@/components/sidebar";
+import usePesertaModule from "@/hook/useGetPeserta";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function DataPendaftarPage() {
-  const [data, setData] = useState([]);
-  const [count, setCount] = useState(0);
+  const { useGetPeserta } = usePesertaModule();
+  const { data } = useGetPeserta();
 
-  useEffect(() => {
-    fetch("http://localhost:4000/calonsiswa/getAll")
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res.data.calonSiswa);
-        setCount(res.data.count);
-      })
-      .catch((err) => console.error("Gagal fetch:", err));
-  }, []);
+  const calonSiswa = data?.calonSiswa || [];
+  const count = data?.count || 0;
 
   return (
     <div className="flex min-h-screen">
@@ -39,7 +32,7 @@ export default function DataPendaftarPage() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item: any, i: number) => (
+              {calonSiswa.map((item: any, i: number) => (
                 <tr
                   key={i}
                   className="text-sm border-t hover:bg-gray-50 text-center"
