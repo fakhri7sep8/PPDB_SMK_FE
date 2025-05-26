@@ -1,6 +1,7 @@
+'use client';
 import * as yup from "yup";
 import Auth from "./lib";
-import { useFormik, Form, FormikProvider, getIn } from "formik";
+import { useFormik, FormikProvider, Form, getIn } from "formik";
 
 const emailOrUsernameSchema = yup
   .string()
@@ -12,10 +13,8 @@ const emailOrUsernameSchema = yup
     "Gunakan format email atau username",
     (value) => {
       if (!value) return false;
-
       const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      const isUsername = /^[a-zA-Z0-9_]+$/.test(value); // username valid tanpa spasi, tanpa @
-
+      const isUsername = /^[a-zA-Z0-9_]+$/.test(value);
       return isEmail || isUsername;
     }
   );
@@ -34,12 +33,75 @@ const Login = () => {
   const { mutate } = useLogin();
 
   const formik = useFormik<any>({
-    initialValues: loginSchema,
+    initialValues: { email: "", password: "" },
     validationSchema: loginSchema,
     enableReinitialize: true,
     onSubmit: (payload) => {
+      console.log(payload)
       mutate(payload);
     },
   });
-  const { handleChange, handleSubmit, handleBlur, values, errors } = formik;
+  const { handleChange, handleSubmit, handleBlur, values, errors, touched, isSubmitting } = formik;
+  
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center mb-6 text-[#18A558]">Login</h2>
+        <FormikProvider value={formik}>
+          <Form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block mb-1 font-medium text-gray-700">Email / Username</label>
+              <input
+                type="text"
+                name="email"
+                className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#18A558] ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`}
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                autoComplete="username"
+                placeholder="Masukkan email atau username"
+              />
+              {errors.email && touched.email && (
+                <p>f</p>
+                // <div className="mt-1 text-sm text-red-500">{errors.email}</div>
+              )}
+            </div>
+            <div>
+              <label className="block mb-1 font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                name="password"
+                className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#18A558] ${errors.password && touched.password ? "border-red-500" : "border-gray-300"}`}
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                autoComplete="current-password"
+                placeholder="Masukkan password"
+              />
+              {errors.password && touched.password && (
+                <p>d</p>
+                // <div className="mt-1 text-sm text-red-500">{errors.password}</div>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-[#18A558] text-white py-2 rounded hover:bg-[#16a54a] transition-all duration-200"
+              disabled={isSubmitting}
+            >
+              {/* {isSubmitting ? "Sedang masuk..." : "Masuk"} */}
+              Masuk
+            </button>
+          </Form>
+        </FormikProvider>
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Belum punya akun?{" "}
+          <a href="/register" className="text-[#18A558] font-medium">
+            Daftar sekarang
+          </a>
+        </p>
+      </div>
+    </div>
+  );
 };
+
+export default Login;

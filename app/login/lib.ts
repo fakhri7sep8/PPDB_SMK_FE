@@ -1,18 +1,22 @@
 import { axiosClient } from "@/lib/axiosClient"
 import { useMutation } from "@tanstack/react-query"
 import { error } from "console"
+import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
 
 
 const Auth = () => {
+    const router = useRouter()
     const login = (payload:any) => {
-        return axiosClient.post("/auth/login-admin").then((res)=>{res.data})
+        return axiosClient.post("/auth/login-admin", payload).then((res)=>{res.data})
     }
 
     const useLogin = () => {
-        const mutate = useMutation({
+        const {mutate} = useMutation({
             mutationFn:(payload:any)=> login(payload),
             onSuccess: async(res)=>{
+                router.push('/dashboard')
+                // console.log(res)
                 Swal.fire({
                     title: "Login Berhasil",
                     text: '',
@@ -23,7 +27,7 @@ const Auth = () => {
                 console.log(error)
             }
         })
-        return mutate
+        return {mutate}
     }
     return {useLogin}
 }
