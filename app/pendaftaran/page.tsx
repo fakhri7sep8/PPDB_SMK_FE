@@ -1,13 +1,19 @@
 "use client";
 
+import Button from "@/components/button";
 import Sidebar from "@/components/sidebar";
 import usePesertaModule from "@/hook/useGetPeserta";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 export default function DataPendaftarPage() {
   const { useGetPeserta } = usePesertaModule();
   const { data } = useGetPeserta();
+
+  const router = useRouter();
+
 
   const calonSiswa = data?.calonSiswa || [];
   const count = data?.count || 0;
@@ -52,11 +58,16 @@ export default function DataPendaftarPage() {
                   <td className="px-4 py-2 border">{item.no_hp}</td>
                   <td className="px-4 py-2 border">{item.asal_sekolah}</td>
                   <td className="text-black border">
-                    <Link href={`/detail_siswa/${item.id}`}>
-                      <button className="w-16 h-6 mx-2 bg-green-400 rounded-3xl">
-                        detail
-                      </button>
-                    </Link>
+                    <div className="flex justify-center gap-2">
+                    <Button
+                      title="Detail"
+                      colorSchema="green"
+                      variant="solid"
+                      width="sm"
+                      height="sm"
+                      onClick={() => router.push(`/detail_siswa/${item.id}`)}
+                    />
+                    </div>
                   </td>
                 </tr>
               ))}

@@ -16,6 +16,7 @@ export default function useStudents() {
   const [students, setStudents] = useState<Student[]>([]);
 
   useEffect(() => {
+    console.log(data,"Data")
     if (data && data.calonSiswa) {
       const mappedStudents = data.calonSiswa.map((student: any) => ({
         id: student.id,
@@ -34,6 +35,7 @@ export default function useStudents() {
 
     try {
       await axiosClient.put(`/calonsiswa/update-status/${id}`, { status });
+
     } catch {
       alert("Gagal update status");
       setStudents((prev) =>
@@ -43,4 +45,6 @@ export default function useStudents() {
   };
 
   return { students, updateStatus, isLoading, error };
+
 }
+

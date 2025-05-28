@@ -22,4 +22,6 @@ const useDetailSiswaModule = () => {
   return { useGetDetailSiswa };
 };
 
+
 export default useDetailSiswaModule;
+

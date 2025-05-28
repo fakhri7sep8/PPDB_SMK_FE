@@ -1,5 +1,5 @@
 import { axiosClient } from "@/lib/axiosClient"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { error } from "console"
 import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
@@ -25,11 +25,29 @@ const Auth = () => {
             },
             onError: (error)=>{
                 console.log(error)
+                Swal.fire({
+                    title: "Login Gagal",
+                    text: 'Periksa kembali email dan password anda',
+                    icon: "error",
+                })
             }
         })
         return {mutate}
     }
-    return {useLogin}
+
+    const getProfile = async()=>{
+        return await axiosClient.get('/auth/profile').then((res) => res.data) 
+    }
+
+    const useGetProfile = () => {
+        const { data, isLoading, isError, error } = useQuery({
+            queryKey: ['/auth/profile'],
+            queryFn: getProfile,
+            select: (data) => { return data.data }
+        })
+        return { data, isLoading, isError, error }
+    }
+    return {useLogin, useGetProfile}
 }
 
 export default Auth
