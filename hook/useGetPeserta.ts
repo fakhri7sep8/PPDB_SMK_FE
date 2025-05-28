@@ -9,13 +9,14 @@ const usePesertaModule = () => {
     }
 
     const useGetPeserta = () => {
-        const { data } = useQuery({
+        const { data, isLoading, isError, error } = useQuery({
             queryKey: ['/calonsiswa/getAll'],
             queryFn: getPeserta,
             select: (data) => { return data.data }
         })
-        return { data }
+        return { data, isLoading, isError, error }
     }
+    
 
     return { useGetPeserta }
 }

@@ -1,7 +1,7 @@
 'use client';
 import * as yup from "yup";
-import Auth from "./lib";
 import { useFormik, FormikProvider, Form, getIn } from "formik";
+import Auth from "@/hook/useAuth";
 
 const emailOrUsernameSchema = yup
   .string()
@@ -62,8 +62,7 @@ const Login = () => {
                 placeholder="Masukkan email atau username"
               />
               {errors.email && touched.email && (
-                <p>f</p>
-                // <div className="mt-1 text-sm text-red-500">{errors.email}</div>
+                <div className="mt-1 text-sm text-red-500">Email Harus Di Isi</div>
               )}
             </div>
             <div>
@@ -79,8 +78,7 @@ const Login = () => {
                 placeholder="Masukkan password"
               />
               {errors.password && touched.password && (
-                <p>d</p>
-                // <div className="mt-1 text-sm text-red-500">{errors.password}</div>
+                <div className="mt-1 text-sm text-red-500">Password harus diisi</div>
               )}
             </div>
             <button
@@ -93,12 +91,6 @@ const Login = () => {
             </button>
           </Form>
         </FormikProvider>
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Belum punya akun?{" "}
-          <a href="/register" className="text-[#18A558] font-medium">
-            Daftar sekarang
-          </a>
-        </p>
       </div>
     </div>
   );

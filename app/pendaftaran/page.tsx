@@ -1,23 +1,19 @@
 "use client";
 
+import Button from "@/components/button";
 import Sidebar from "@/components/sidebar";
+import usePesertaModule from "@/hook/useGetPeserta";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function DataPendaftarPage() {
-  const [data, setData] = useState([]);
-  const [count, setCount] = useState(0);
+  const { useGetPeserta } = usePesertaModule();
+  const { data } = useGetPeserta();
+  const router = useRouter();
 
-  useEffect(() => {
-    fetch("http://localhost:4000/calonsiswa/getAll")
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res.data.calonSiswa);
-        setCount(res.data.count);
-      })
-      .catch((err) => console.error("Gagal fetch:", err));
-  }, []);
+  const calonSiswa = data?.calonSiswa || [];
+  const count = data?.count || 0;
 
   return (
     <div className="flex min-h-screen">
@@ -39,7 +35,7 @@ export default function DataPendaftarPage() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item: any, i: number) => (
+              {calonSiswa.map((item: any, i: number) => (
                 <tr
                   key={i}
                   className="text-sm border-t hover:bg-gray-50 text-center"
@@ -59,11 +55,16 @@ export default function DataPendaftarPage() {
                   <td className="px-4 py-2 border">{item.no_hp}</td>
                   <td className="px-4 py-2 border">{item.asal_sekolah}</td>
                   <td className="text-black border">
-                    <Link href={`/detail_siswa/${item.id}`}>
-                      <button className="w-16 h-6 mx-2 bg-green-400 rounded-3xl">
-                        detail
-                      </button>
-                    </Link>
+                    <div className="flex justify-center gap-2">
+                    <Button
+                      title="Detail"
+                      colorSchema="green"
+                      variant="solid"
+                      width="sm"
+                      height="sm"
+                      onClick={() => router.push(`/detail_siswa/${item.id}`)}
+                    />
+                    </div>
                   </td>
                 </tr>
               ))}
