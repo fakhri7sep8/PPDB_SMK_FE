@@ -7,10 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+
 export default function DataPendaftarPage() {
   const { useGetPeserta } = usePesertaModule();
   const { data } = useGetPeserta();
+
   const router = useRouter();
+
 
   const calonSiswa = data?.calonSiswa || [];
   const count = data?.count || 0;

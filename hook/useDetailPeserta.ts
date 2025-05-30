@@ -8,7 +8,6 @@ const useDetailSiswaModule = () => {
     return res.data;
   };
 
-
   const useGetDetailSiswa = (id: string) => {
     const { data, isLoading, error } = useQuery({
       queryKey: ["detailSiswa", id],
@@ -23,4 +22,6 @@ const useDetailSiswaModule = () => {
   return { useGetDetailSiswa };
 };
 
+
 export default useDetailSiswaModule;
+

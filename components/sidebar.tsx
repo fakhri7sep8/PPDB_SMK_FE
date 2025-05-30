@@ -13,7 +13,7 @@ export default function Sidebar() {
     { href: "/pendaftaran", icon: "📝", label: "Pendaftaran" },
     { href: "/students", icon: "👨‍🎓", label: "Students" },
     { href: "/soal", icon: "📚", label: "Bank Soal" },
-    { href: "/test+", icon: "👨‍🎓", label: "Hasil Test" },
+    { href: "/test", icon: "👨‍🎓", label: "Hasil Test" },
   ];
 
   return (

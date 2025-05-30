@@ -24,7 +24,7 @@
     "react-spinners": "^0.17.0",
     "recharts": "^2.15.3",
     "save": "^2.9.0",
-    "sweetalert2": "^11.21.2",
+    "sweetalert2": "^11.22.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {

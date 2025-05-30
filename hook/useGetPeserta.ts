@@ -1,12 +1,10 @@
 import { axiosClient } from "@/lib/axiosClient"
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
-
 
 const usePesertaModule = () => {
-    const getPeserta = async()=>{
-        return await axiosClient.get('/calonsiswa/getAll').then((res) => res.data) 
-    }
+  const getPeserta = async () => {
+    return await axiosClient.get('/calonsiswa/getAll').then((res) => res.data)
+  }
 
     const useGetPeserta = () => {
         const { data, isLoading, isError, error } = useQuery({
@@ -16,9 +14,9 @@ const usePesertaModule = () => {
         })
         return { data, isLoading, isError, error }
     }
-    
 
-    return { useGetPeserta }
+
+  return { useGetPeserta }
 }
 
 export default usePesertaModule

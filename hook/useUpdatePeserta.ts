@@ -35,8 +35,8 @@ export default function useStudents() {
 
     try {
       await axiosClient.put(`/calonsiswa/update-status/${id}`, { status });
-    } catch(e) {
-        console.log(e)
+
+    } catch {
       alert("Gagal update status");
       setStudents((prev) =>
         prev.map((student) => (student.id === id ? { ...student, status: "Pending" } : student))
@@ -45,4 +45,6 @@ export default function useStudents() {
   };
 
   return { students, updateStatus, isLoading, error };
+
 }
+
