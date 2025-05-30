@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReactQuery from "@/components/ReactQuery";
+import NextAuthProvider from "@/components/NextAuthProvider";
+import { Session } from "next-auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,15 +22,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: Session | null | undefined;
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ReactQuery>
-          {children}
-        </ReactQuery>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <NextAuthProvider session={session}>
+          <ReactQuery>{children}</ReactQuery>
+        </NextAuthProvider>
       </body>
     </html>
   );

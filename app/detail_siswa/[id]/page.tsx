@@ -3,10 +3,12 @@
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import useDetailSiswaModule from "@/hook/useDetailPeserta";
+import { use } from "react";
 import Button from "@/components/button";
 
-export default function DetailSiswaPage() {
-  const { id } = useParams();
+
+export default function DetailSiswaPage({params}: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const siswaId = String(id);
   const router = useRouter();
 

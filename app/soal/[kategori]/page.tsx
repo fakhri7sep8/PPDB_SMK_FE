@@ -6,7 +6,8 @@ import useSoal from "@/hook/useSoal";
 import { useParams, useRouter } from "next/navigation";
 
 export default function SoalKategoriPage() {
-  const { kategori } = useParams();
+  const params = useParams();
+  const kategori = params?.["kategori"];
   const router = useRouter();
 
   const { useGetSoal, useDeleteSoal } = useSoal();
@@ -16,13 +17,13 @@ export default function SoalKategoriPage() {
   return (
     <main className="min-h-screen flex bg-gray-50 ml-60">
       <Sidebar />
-      <div className="flex-1 px-4 py-6 sm:px-8 max-w-3xl">
+      <div className="flex-1 px-4 py-6 sm:px-8 max-w-3xl relative">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-[#18A558]">
             Soal Kategori: {kategori}
           </h1>
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push('/soal')}
             className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-3 py-1 rounded text-sm"
           >
             Kembali
@@ -63,7 +64,7 @@ export default function SoalKategoriPage() {
 
                 <div className="flex gap-2">
                   <button
-                    // onClick={() => router.push(/admin/soal/edit/${soal.id})}
+                    onClick={() => router.push(`/soal/${kategori}/edit/${soal.id}`)}
                     className="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 text-sm"
                   >
                     Edit
@@ -79,6 +80,15 @@ export default function SoalKategoriPage() {
             ))}
           </div>
         )}
+
+        {/* Tombol tambah soal di pojok kanan bawah */}
+        <button
+          onClick={() => router.push(`/soal/${kategori}/tambah`)}
+          className="fixed bottom-8 right-8 z-50 bg-[#18A558] hover:bg-[#15994a] text-white rounded-lg shadow-lg px-6 py-4 font-bold text-lg transition-all"
+          title="Tambah Soal"
+        >
+          + 
+        </button>
       </div>
     </main>
   );
