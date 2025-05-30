@@ -2,6 +2,7 @@
 import * as yup from "yup";
 import { useFormik, FormikProvider, Form, getIn } from "formik";
 import Auth from "@/hook/useAuth";
+import { useSession } from "next-auth/react";
 
 const emailOrUsernameSchema = yup
   .string()
@@ -29,6 +30,8 @@ export const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
+  const {data:session, status} = useSession()
+  console.log(session, 'session', status)
   const { useLogin } = Auth();
   const { mutate } = useLogin();
 
@@ -50,7 +53,7 @@ const Login = () => {
         <FormikProvider value={formik}>
           <Form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block mb-1 font-medium text-gray-700">Email / Username</label>
+              <label className="block mb-1 font-medium text-gray-700">Email</label>
               <input
                 type="text"
                 name="email"

@@ -24,18 +24,30 @@ const useSoal = (kategori?: any) => {
       .then((res) => res.data);
   };
   const useCreateSoal = () => {
-    const { data, isLoading, isError, error } = useQuery({
-      queryKey: ["/soal/create"],
-      queryFn: createSoal,
-      select: (data) => {
-        return data.data;
-      },
-    });
-    return { data, isLoading, isError, error };
+    const {mutate} = useMutation({
+        mutationFn: (payload: any) => createSoal(payload),
+        onSuccess: (res) => {
+          console.log(res.data)
+          Swal.fire({
+            title: "Soal Berhasil Dibuat",
+            icon: "success",
+          });
+        },
+        onError: (error) => {
+          console.error(error);
+          Swal.fire({
+            title: "Gagal Membuat Soal",
+            text: "Periksa kembali data yang anda masukkan",
+            icon: "error",
+          });
+        }
+    })
+    return {mutate};
   };
 
   const deleteSoal = async (id: string) => {
-    return await axiosClient.delete(`/soal/${id}`).then((res) => res.data);
+    const query = id ? `?id=${id}` : "";
+    return await axiosClient.delete(`/soal/delete/${query}`).then((res) => res.data);
   };
   const useDeleteSoal = () => {
     const { mutate } = useMutation({
@@ -57,7 +69,49 @@ const useSoal = (kategori?: any) => {
     });
     return { mutate };
   };
-  return { useGetSoal, useCreateSoal, useDeleteSoal };
+
+  const updateSoal = async (payload: any, id:string) => {
+    return await axiosClient
+      .put(`/soal/update/${id}`, payload)
+      .then((res) => res.data);
+  }
+  const useUpdateSoal = (id:string) => {
+    const {mutate}= useMutation({
+      mutationFn : (payload: any, ) => updateSoal(payload, id),
+      onSuccess: (res) => {
+        console.log(res.data);
+        Swal.fire({
+          title: "Soal Berhasil Diperbarui",
+          icon: "success",
+        });
+      },
+      onError: (error) => {
+        console.error(error);
+        Swal.fire({
+          title: "Gagal Memperbarui Soal",
+          text: "Periksa kembali data yang anda masukkan",
+          icon: "error",
+        });
+      }
+    })
+    return { mutate };
+  }
+
+  const getSoalById = async (id: string) => {
+  return await axiosClient.get(`/soal/${id}`).then(res => res.data);
+};
+
+const useGetSoalById = (id: string) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["/soal", id],
+    queryFn: () => getSoalById(id),
+    enabled: !!id,
+    select: (data) => data.data, // ambil data.pertanyaan, data.opsiJawaban
+  });
+
+  return { data, isLoading, isError };
+};
+  return { useGetSoal, useCreateSoal, useDeleteSoal, useUpdateSoal, useGetSoalById   };
 };
 
 export default useSoal;
