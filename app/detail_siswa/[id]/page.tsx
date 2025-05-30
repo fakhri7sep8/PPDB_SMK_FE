@@ -3,9 +3,10 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import useDetailSiswaModule from "@/hook/useDetailPeserta";
+import { use } from "react";
 
-export default function DetailSiswaPage() {
-  const { id } = useParams();
+export default function DetailSiswaPage({params}: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const siswaId = String(id);
   const { useGetDetailSiswa } = useDetailSiswaModule();
   const { data: siswa, isLoading, error } = useGetDetailSiswa(siswaId);

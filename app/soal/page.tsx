@@ -31,7 +31,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/matematika')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Matematika')}}/>
         </Card>
         <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">
@@ -41,7 +41,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Psikologi')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Psikolog')}}/>
         </Card>
         <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">
@@ -51,7 +51,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/inggris')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Inggris')}}/>
         </Card>
         <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">
@@ -61,7 +61,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/diniyah')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Diniyah')}}/>
         </Card>
         {/* <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">

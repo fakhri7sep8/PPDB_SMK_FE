@@ -4,6 +4,8 @@ import Sidebar from "@/components/sidebar";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import Card from "@/components/card";
 import useStudents from "@/hook/useUpdatePeserta";
+import { signOut, useSession } from "next-auth/react";
+import Button from "@/components/button";
 
 interface Peserta {
   id: number;
@@ -14,6 +16,8 @@ interface Peserta {
 
 export default function DashboardPage() {
   const { students, updateStatus } = useStudents();
+  const {data:session} = useSession()
+  console.log(session)
   const countMenunggu = students.filter(
     (s) => s.status.toLowerCase() === "pending"
   ).length;
@@ -107,6 +111,7 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
+      <Button title="Log Out" width="full" colorSchema="red" onClick={()=>signOut()}/>
       </main>
     </div>
   );
