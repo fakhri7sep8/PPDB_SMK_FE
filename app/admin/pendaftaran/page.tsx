@@ -62,7 +62,7 @@ export default function DataPendaftarPage() {
                       variant="solid"
                       width="sm"
                       height="sm"
-                      onClick={() => router.push(`/detail_siswa/${item.id}`)}
+                      onClick={() => router.push(`/admin/detail_siswa/${item.id}`)}
                     />
                     </div>
                   </td>

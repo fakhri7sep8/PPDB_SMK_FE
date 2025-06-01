@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { useFormik, FormikProvider, Form, getIn } from "formik";
 import Auth from "@/hook/useAuth";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const emailOrUsernameSchema = yup
   .string()
@@ -34,6 +35,7 @@ const Login = () => {
   console.log(session, 'session', status)
   const { useLogin } = Auth();
   const { mutate } = useLogin();
+  const router = useRouter();
 
   const formik = useFormik<any>({
     initialValues: { email: "", password: "" },
@@ -45,6 +47,9 @@ const Login = () => {
     },
   });
   const { handleChange, handleSubmit, handleBlur, values, errors, touched, isSubmitting } = formik;
+  if( status === "authenticated") {
+    return router.push("/admin/dashboard");
+  }
   
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

@@ -8,12 +8,12 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const menuItems = [
-    { href: "/dashboard", icon: "📊", label: "Dashboard" },
-    { href: "/profile", icon: "👤", label: "Profile" },
-    { href: "/pendaftaran", icon: "📝", label: "Pendaftaran" },
-    { href: "/students", icon: "👨‍🎓", label: "Students" },
-    { href: "/soal", icon: "📚", label: "Bank Soal" },
-    { href: "/test+", icon: "👨‍🎓", label: "Hasil Test" },
+    { href: "/admin/dashboard", icon: "📊", label: "Dashboard" },
+    { href: "/admin/profile", icon: "👤", label: "Profile" },
+    { href: "/admin/pendaftaran", icon: "📝", label: "Pendaftaran" },
+    { href: "/admin/students", icon: "👨‍🎓", label: "Students" },
+    { href: "/admin/soal", icon: "📚", label: "Bank Soal" },
+    { href: "/admin/test", icon: "📃", label: "Hasil Test" },
   ];
 
   return (

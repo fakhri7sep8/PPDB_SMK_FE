@@ -23,7 +23,7 @@ export default function SoalKategoriPage() {
             Soal Kategori: {kategori}
           </h1>
           <button
-            onClick={() => router.push('/soal')}
+            onClick={() => router.push('/admin/soal')}
             className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-3 py-1 rounded text-sm"
           >
             Kembali
@@ -64,7 +64,7 @@ export default function SoalKategoriPage() {
 
                 <div className="flex gap-2">
                   <button
-                    onClick={() => router.push(`/soal/${kategori}/edit/${soal.id}`)}
+                    onClick={() => router.push(`/admin/soal/${kategori}/edit/${soal.id}`)}
                     className="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 text-sm"
                   >
                     Edit
@@ -83,7 +83,7 @@ export default function SoalKategoriPage() {
 
         {/* Tombol tambah soal di pojok kanan bawah */}
         <button
-          onClick={() => router.push(`/soal/${kategori}/tambah`)}
+          onClick={() => router.push(`/admin/soal/${kategori}/tambah`)}
           className="fixed bottom-8 right-8 z-50 bg-[#18A558] hover:bg-[#15994a] text-white rounded-lg shadow-lg px-6 py-4 font-bold text-lg transition-all"
           title="Tambah Soal"
         >
