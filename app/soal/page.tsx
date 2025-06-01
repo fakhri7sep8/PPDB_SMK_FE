@@ -61,7 +61,18 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Diniyah')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Diniyyah')}}/>
+        </Card>
+        
+        <Card variant="outline" padding="lg" width="full">
+          <div className="flex items-center gap-4 mb-4">
+            <Image src={"/assets/notebook.png"} width={100} height={100} alt=''></Image>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Bta</h3>
+              <p className="text-sm text-gray-600">Soal-Soal Bta</p>
+            </div>
+          </div>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Bta')}}/>
         </Card>
         {/* <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">

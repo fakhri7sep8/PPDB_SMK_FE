@@ -13,7 +13,7 @@ export default function Sidebar() {
     { href: "/pendaftaran", icon: "📝", label: "Pendaftaran" },
     { href: "/students", icon: "👨‍🎓", label: "Students" },
     { href: "/soal", icon: "📚", label: "Bank Soal" },
-    { href: "/test", icon: "👨‍🎓", label: "Hasil Test" },
+    { href: "/Hasil_test", icon: "👨‍🎓", label: "Hasil Test" },
   ];
 
   return (
@@ -27,7 +27,9 @@ export default function Sidebar() {
             href={item.href}
             key={item.href}
             className={`flex items-center gap-3 px-4 py-2 rounded text-gray-700 hover:text-blue-600 hover:bg-gray-100 ${
-              pathname === item.href ? "bg-gray-100 text-blue-600 font-semibold" : ""
+              pathname === item.href
+                ? "bg-gray-100 text-blue-600 font-semibold"
+                : ""
             }`}
           >
             <span className="text-xl">{item.icon}</span>

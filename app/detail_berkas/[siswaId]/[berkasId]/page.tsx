@@ -7,8 +7,8 @@ import Sidebar from "@/components/sidebar";
 
 export default function Page() {
   const params = useParams();
-  const siswaId = String(params.siswaId);
-  const berkasId = Number(params.berkasId);
+  const siswaId = String(params?.siswaId);
+  const berkasId = Number(params?.berkasId);
 
   const { useGetDetailSiswa } = useDetailSiswaModule();
   const { data: siswa, isLoading, error } = useGetDetailSiswa(siswaId);

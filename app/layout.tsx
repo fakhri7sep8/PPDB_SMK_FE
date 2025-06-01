@@ -5,6 +5,7 @@ import ReactQuery from "@/components/ReactQuery";
 import NextAuthProvider from "@/components/NextAuthProvider";
 import { Session } from "next-auth";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,11 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextAuthProvider session={session}>
-          <ReactQuery>{children}</ReactQuery>
+          <ReactQuery>
+            {children}
+          </ReactQuery>
         </NextAuthProvider>
       </body>
     </html>

@@ -24,6 +24,7 @@ const Button: React.FC<
   width = "full",
   height = "md",
   isLoading = false,
+
   ...props
 }) => {
   return (
