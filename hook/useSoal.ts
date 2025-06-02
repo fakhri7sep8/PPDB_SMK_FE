@@ -53,6 +53,7 @@ const useSoal = (kategori?: any) => {
     const { mutate } = useMutation({
       mutationFn: (id: string) => deleteSoal(id),
       onSuccess: () => {
+        window.location.reload()
         Swal.fire({
           title: "Soal Berhasil Dihapus",
           icon: "success",

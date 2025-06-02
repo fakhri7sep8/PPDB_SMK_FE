@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+import { useState } from "react";
+import { useRouter, useParams } from "next/navigation";
 import Sidebar from "@/components/sidebar";
 import useSoal from "@/hook/useSoal";
 
-export default function EditSoalPage() {
+export default function TambahSoalPage() {
   const router = useRouter();
-  const { id, kategori } = useParams() as { id: string; kategori: string };
-  const { useUpdateSoal, useGetSoalById } = useSoal();
-  const { mutate: updateSoal } = useUpdateSoal(id);
-  const { data, isLoading, isError } = useGetSoalById(id);
+  const params = useParams();
+  const kategori = params?.kategori as string;
+
+  const { useCreateSoal } = useSoal();
+  const { mutate: createSoal} = useCreateSoal();
 
   const [pertanyaan, setPertanyaan] = useState("");
   const [opsiJawaban, setOpsiJawaban] = useState([
@@ -21,13 +21,6 @@ export default function EditSoalPage() {
     { kode: "D", isi: "", is_benar: false },
   ]);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (data) {
-      setPertanyaan(data.pertanyaan);
-      setOpsiJawaban(data.opsiJawaban);
-    }
-  }, [data]);
 
   const handleOpsiChange = (idx: number, field: "isi" | "is_benar", value: string | boolean) => {
     setOpsiJawaban((prev) =>
@@ -60,41 +53,22 @@ export default function EditSoalPage() {
       return;
     }
 
-    updateSoal(
-      {
-        pertanyaan,
-        kategori_pelajaran: kategori,
-        opsiJawaban,
-      },
-      {
-        onSuccess: () => {
-          router.push(`/soal/${kategori}`);
-        },
-      }
-    );
+    createSoal({
+      kategori_pelajaran : kategori,
+      pertanyaan,
+      opsiJawaban,
+    });
+
+    // Optional: bisa tambahin delay redirect di useCreateSoal onSuccess
+    router.push(`/admin/soal/${kategori}`);
   };
-
-  if (isLoading) {
-    return <div className="ml-60 p-8">Loading soal...</div>;
-  }
-
-  if (isError) {
-    return (
-      <div className="ml-60 p-8 text-red-600">
-        Gagal memuat soal. Coba lagi nanti ya.
-      </div>
-    );
-  }
 
   return (
     <main className="min-h-screen flex bg-gray-50 ml-60">
       <Sidebar />
       <div className="flex-1 px-4 py-8 sm:px-8 max-w-2xl mx-auto">
-        <h1 className="text-2xl font-bold text-[#18A558] mb-8">Edit Soal Kategori: {kategori}</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-xl shadow border border-gray-100 space-y-6"
-        >
+        <h1 className="text-2xl font-bold text-[#18A558] mb-8">Tambah Soal Kategori: {kategori}</h1>
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow border border-gray-100 space-y-6">
           <div>
             <label className="block font-semibold mb-2">Pertanyaan</label>
             <textarea
@@ -135,15 +109,18 @@ export default function EditSoalPage() {
             <button
               type="button"
               className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold"
-              onClick={() => router.push(`/soal/${kategori}`)}
+              onClick={() => router.back()}
+            //   disabled={isLoading}
             >
               Batal
             </button>
             <button
               type="submit"
               className="px-6 py-2 rounded bg-[#18A558] hover:bg-[#15994a] text-white font-bold"
+            //   disabled={isLoading}
             >
-              Update Soal
+              {/* {isLoading ? "Menyimpan..." : "Simpan Soal"} */}
+              Simpan Soal
             </button>
           </div>
         </form>

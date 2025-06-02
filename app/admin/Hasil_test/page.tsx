@@ -10,12 +10,10 @@ export default function NilaiKategoriPage() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error mengambil data nilai</p>;
 
-  // Ambil semua kategori unik
   const semuaKategori: string[] = Array.from(
     new Set(data.map((item: any) => item.kategori_pelajaran))
   );
 
-  // Ganti Record dengan Map untuk menyimpan nilai per siswa
   const nilaiPerSiswa = new Map<string, Map<string, number>>();
 
   data.forEach((item: any) => {
@@ -26,7 +24,6 @@ export default function NilaiKategoriPage() {
     nilaiPerSiswa.get(nama)?.set(item.kategori_pelajaran, item.nilai);
   });
 
-  // List nama siswa
   const siswaList = Array.from(nilaiPerSiswa.keys());
 
   return (

@@ -31,7 +31,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Matematika')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/admin/soal/Matematika')}}/>
         </Card>
         <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">
@@ -41,7 +41,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Psikolog')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/admin/soal/Psikolog')}}/>
         </Card>
         <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">
@@ -51,7 +51,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Inggris')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/admin/soal/Inggris')}}/>
         </Card>
         <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">
@@ -61,7 +61,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Matematika</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Diniyyah')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/admin/soal/Diniyyah')}}/>
         </Card>
         
         <Card variant="outline" padding="lg" width="full">
@@ -72,7 +72,7 @@ export default function BankSoalPage() {
               <p className="text-sm text-gray-600">Soal-Soal Bta</p>
             </div>
           </div>
-          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/soal/Bta')}}/>
+          <Button title="Lihat Soal" width="full" colorSchema="green" onClick={()=>{router.push('/admin/soal/Bta')}}/>
         </Card>
         {/* <Card variant="outline" padding="lg" width="full">
           <div className="flex items-center gap-4 mb-4">

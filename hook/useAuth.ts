@@ -26,7 +26,7 @@ const Auth = () => {
           refreshToken: res.data.refresh_token,
           redirect: false,
         });
-        router.push("/dashboard");
+        router.push("/admin/dashboard");
         // console.log(res)
         Swal.fire({
           title: "Login Berhasil",

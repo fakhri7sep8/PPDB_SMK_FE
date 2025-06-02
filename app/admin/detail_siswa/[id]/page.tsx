@@ -149,7 +149,7 @@ export default function DetailSiswaPage({params}: { params: Promise<{ id: string
                       <button
                         className="bg-green-600 text-white px-5 py-2 rounded-full hover:bg-blue-600 transition-colors"
                         onClick={() =>
-                          router.push(`/detail_berkas/${siswa.id}/${berkas.id}`)
+                          router.push(`/admin/detail_berkas/${siswa.id}/${berkas.id}`)
                         }
                       >
                         Lihat Detail Berkas
