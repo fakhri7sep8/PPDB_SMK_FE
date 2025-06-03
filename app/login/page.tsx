@@ -1,9 +1,10 @@
-'use client';
+"use client";
 import * as yup from "yup";
 import { useFormik, FormikProvider, Form, getIn } from "formik";
 import Auth from "@/hook/useAuth";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const emailOrUsernameSchema = yup
   .string()
@@ -31,8 +32,8 @@ export const loginSchema = yup.object().shape({
 });
 
 const Login = () => {
-  const {data:session, status} = useSession()
-  console.log(session, 'session', status)
+  const { data: session, status } = useSession();
+  console.log(session, "session", status);
   const { useLogin } = Auth();
   const { mutate } = useLogin();
   const router = useRouter();
@@ -42,28 +43,46 @@ const Login = () => {
     validationSchema: loginSchema,
     enableReinitialize: true,
     onSubmit: (payload) => {
-      console.log(payload)
+      console.log(payload);
       mutate(payload);
     },
   });
-  const { handleChange, handleSubmit, handleBlur, values, errors, touched, isSubmitting } = formik;
-  
-  if(status === "authenticated") {
-    return router.push('/admin/dashboard');
-  }
+  const {
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    values,
+    errors,
+    touched,
+    isSubmitting,
+  } = formik;
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/admin/dashboard");
+    }
+  }, [status, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6 text-[#18A558]">Login</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-[#18A558]">
+          Login
+        </h2>
         <FormikProvider value={formik}>
           <Form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block mb-1 font-medium text-gray-700">Email</label>
+              <label className="block mb-1 font-medium text-gray-700">
+                Email
+              </label>
               <input
                 type="text"
                 name="email"
-                className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#18A558] ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`}
+                className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#18A558] ${
+                  errors.email && touched.email
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -71,15 +90,23 @@ const Login = () => {
                 placeholder="Masukkan email atau username"
               />
               {errors.email && touched.email && (
-                <div className="mt-1 text-sm text-red-500">Email Harus Di Isi</div>
+                <div className="mt-1 text-sm text-red-500">
+                  Email Harus Di Isi
+                </div>
               )}
             </div>
             <div>
-              <label className="block mb-1 font-medium text-gray-700">Password</label>
+              <label className="block mb-1 font-medium text-gray-700">
+                Password
+              </label>
               <input
                 type="password"
                 name="password"
-                className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#18A558] ${errors.password && touched.password ? "border-red-500" : "border-gray-300"}`}
+                className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#18A558] ${
+                  errors.password && touched.password
+                    ? "border-red-500"
+                    : "border-gray-300"
+                }`}
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -87,7 +114,9 @@ const Login = () => {
                 placeholder="Masukkan password"
               />
               {errors.password && touched.password && (
-                <div className="mt-1 text-sm text-red-500">Password harus diisi</div>
+                <div className="mt-1 text-sm text-red-500">
+                  Password harus diisi
+                </div>
               )}
             </div>
             <button
